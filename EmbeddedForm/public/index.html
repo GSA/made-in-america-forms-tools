@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Embedded Testing Project Landing Page</title>
+        <link rel="stylesheet" href="/assets/css/simpleform.css">
+       
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.12.1/css/uswds.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@formio/uswds@2.4.0/dist/uswds.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.form.io/formiojs/formio.full.min.css"/>
+    </head>
+    <body>
+        <div class="pageContainer">
+
+            <h1>This is the landing page for the embedded form testing project</h1>
+
+            <p>This project tests embedding form.io forms different ways:</p>
+            <ol>
+                <li><a href="embed_inline/InlineEmbed_Example.html">Using Inline embedding</a></li>
+                <li><a href="embed_javascript/JavascriptEmbed_Example.html">Using Javascript embedding</a></li>
+            </ol>
+
+            <p>It also contains simple example embedding pages that are similar to how certain projects 
+                are embedded in their calling applications.  This is useful for testing, when wishing to 
+                simulate the calling environment as closely as possible:</p>
+            <ol>
+                <li>
+                    <p>Made In America</p>
+                    <ul>
+                        <li><a href="proj_mia/Nonavailability.html">Nonavailability Waiver</a></li>
+                        <li><a href="proj_mia/FinancialAssistanceWaiver.html">Financial Assistance Waiver</a></li>
+                        <li><a href="proj_mia/Urgent.html">Urgent Waiver (TBD)</a></li>
+                    </ul>
+                    <p></p>
+                </li>
+                <li>
+                    <p><a href="proj_hud/IntroFHEO.html">Hud 903 Form</a> (javascript embedding with submission page redirect)</p>
+                    <p>
+                        Ultimately the team determined to go with an application to host the HUD form.<br/>
+                        The application can be found here: <a href="https://github.com/18F/formservice-hud903">https://github.com/18F/formservice-hud903</a>
+                    </p>
+                </li>
+            </ol>
+        </div>
+    </body>
+</html>
