@@ -23,7 +23,7 @@
           <div class="grid-col-4 width-card">{% include logo.html %}</div>
           <div class="grid-col-8">
             <h1 class="font-sans-lg desktop:margin-bottom-0">
-              Urgent Requirement Waiver
+              Seq ID
             </h1>
           </div>
         </div>
@@ -36,12 +36,51 @@
     </main>
 
     <script type="text/javascript">
+
+
+
+var myHeaders = new Headers();
+myHeaders.append("x-token", "aJeBVtRoKxUraQxZTNtv3fTXeE0z4j");
+
+var formdata = new FormData();
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  
+  redirect: 'follow'
+};
+
+//fetch("https://test.forms.madeinamerica.gov/mia-dev/seqid/submission?sort=-data.incrementingField&limit=1", requestOptions)
+ // .then(response => response.text())
+  //.then(result => {
+    
+   // console.log(JSON.parse(result)[0].data.autoIncrement) 
+ // })
+  //.catch(error => console.log('error', error));
+  
+   //const formio1 = new Formio('https://test.forms.madeinamerica.gov/mia-dev/seqid');
+    function getAutoIncrement(fieldName, cb) {
+      fetch("https://test.forms.madeinamerica.gov/mia-dev/seqid/submission?sort=-data.incrementingField&limit=1", requestOptions)
+     .then(response => response.text()).then(function(subs) {
+        var value = 0;
+      
+        if (subs.length) {
+          //console.log(JSON.parse(subs)[0].data.autoIncrement) 
+          value = parseInt(JSON.parse(subs)[0].data.incrementingField, 10);
+          value++;
+        }
+        cb(null, value);
+      }, cb);
+    }
+
       window.onload = function () {
+
         Formio.use(premium)
         Formio.use(uswds)
         Formio.createForm(
           document.getElementById('formio'),
-          'https://test.forms.madeinamerica.gov/mia-test/urgentrequirementsreport'
+          'https://test.forms.madeinamerica.gov/mia-dev/seqid'
         ).then(function (form, event) {
           form.on('nextPage', function (event) {
             window.scrollTo(0, 0)
@@ -49,11 +88,29 @@
           form.on('prevPage', function (event) {
             window.scrollTo(0, 0)
           })
-          // Submit the form
-          form.on('submit', function (submission) {
-            window.location.href = 'success.html'
-          })
+        //form.submission.data.incrementingField = getAutoIncrement;
+     
+        getAutoIncrement('autoIncrement', function(err, value) {
+        if (err) { return }
+           console.log('test-value'+value);
+           form.submission.data.incrementingField = parseInt(value);
+          //window.location.href = 'success.html'
         })
+
+   
+ 
+          // Submit the form
+          form.on('submit', function (event,submission) {
+
+           // getAutoIncrement('autoIncrement', function(err, value) {
+        //if (err) { return }
+          // console.log('test-value'+value);
+           //form.submission.data.incrementingField = value;
+         // window.location.href = 'success.html'
+       // })
+        window.location.href = 'success.html'
+        })
+    })
       }
     </script>
   </body>
